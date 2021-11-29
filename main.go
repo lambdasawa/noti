@@ -15,7 +15,8 @@ func main() {
 
 	if canCreateDesktopNotification() {
 		notify = notificator.New(notificator.Options{})
-		if err := notify.Push("", message, "", notificator.UR_CRITICAL); err != nil {
+		escapedMessage := strings.ReplaceAll(message, `"`, `\"`)
+		if err := notify.Push("", escapedMessage, "", notificator.UR_CRITICAL); err != nil {
 			panic(err)
 		}
 	}
